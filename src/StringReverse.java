@@ -1,8 +1,12 @@
 public class StringReverse {
     public static void main(String[] args){
-        System.out.println(reverse("Hi My name is Praveen"));
+        System.out.println("reverse: " + reverse("Hi My name is Praveen"));
 
-        System.out.println(efficient_reverse("Hi My name is Praveen"));
+        System.out.println("efficient_reverse: " + efficient_reverse("Hi My name is Praveen"));
+
+        System.out.println("reverseRecursive: " + reverseRecursive("Hi My name is Praveen"));
+
+        System.out.println("reverseCharArray: " + reverseCharArray("Hi My name is Praveen"));
     }
 
     //Works but not very efficient, since we are creating many intermediate strings and
@@ -29,5 +33,20 @@ public class StringReverse {
             sb.append(str.charAt(i));
         }
         return sb.toString();
+    }
+
+    private static String reverseRecursive(String str) {
+        if(null == str || str.length() <= 1) return str;
+        return str.charAt(str.length() - 1) + reverseRecursive(str.substring(0, str.length()-1));
+    }
+
+    private static String reverseCharArray(String str) {
+        char[] chars = str.toCharArray();
+        for(int left = 0, right = chars.length - 1; left <= right; left++, right--) {
+            char temp = chars[left];
+            chars[left] = chars[right];
+            chars[right] = temp;
+        }
+        return new String(chars);
     }
 }
